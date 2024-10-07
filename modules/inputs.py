@@ -28,36 +28,59 @@ def button_module(label):
 
 # MODULES SERVEUR
 
-userInput = {} #Stockage des données en attendant requêtage
+#Stockage des inputs utilisateurs en attendant requêtage
+userInput= {}
 
 @module.server
 def render_text_module(input, output, session):
     @reactive.effect
     def _():
         userInput[session.ns('textInput')] = input.textInput() #update du dictionnaire
-        print(userInput)
 
 @module.server
 def render_numeric_module(input, output, session):
     @reactive.effect
     def _():
-        print(input.numericInput())
+        userInput[session.ns('numericInput')] = input.numericInput()
 
 @module.server
 def render_password_module(input, output, session):
     @reactive.effect
     def _():
-        print(input.passwordInput())
+        userInput[session.ns('passwordInput')] = input.passwordInput()
 
 @module.server
 def render_selectize_module(input, output, session):
     @reactive.effect
     def _():
-        print(input.selectizeInput())
+        userInput[session.ns('selectizeInput')] = input.selectizeInput()
 
 @module.server
 def render_textarea_module(input, output, session):
     @reactive.effect
     def _():
-        print(input.textArea())
+        userInput[session.ns('textArea')] = input.textArea()
 
+#Requêtage BDD
+@module.server
+def react_button_module(input, output, session):
+    @reactive.Effect
+    @reactive.event(input.actionButton)
+    def _():
+        if (session.ns('actionButton') == "oracle_validate-actionButton") :
+            print("Search oracle DB")
+
+        elif (session.ns('actionButton') == "postgreSQL_validate-actionButton"):
+            print("Search PostGreSQL DB")
+
+        elif (session.ns('actionButton') == "snowflake_validate-actionButton"):
+            print("Search Snowflake DB")
+
+        elif (session.ns('actionButton') == "iics_validate-actionButton"):
+            print("Search IICS DB")
+
+        elif (session.ns('actionButton') == "excel_validate-actionButton"):
+            print("Search Excel file")
+
+        else :
+            print("This option doesnt exist.")

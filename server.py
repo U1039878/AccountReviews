@@ -14,6 +14,9 @@ def app_server(input, output, session):
     render_textarea_module("oracle_sql_query")
     render_selectize_module("state1")
     render_selectize_module("state2")
+    react_button_module("oracle_validate")
+
+
 
     #PostgreSQL panel
     render_text_module("postgreSQL_hostname")
@@ -23,6 +26,14 @@ def app_server(input, output, session):
     render_textarea_module("postgreSQL_sql_query")
     render_selectize_module("state3")
     render_selectize_module("state4")
+    react_button_module("postgreSQL_validate")
+
+    #Snowflake panel
+    react_button_module("snowflake_validate")
+
+    #IICS panel
+    react_button_module("iics_validate")
+
 
     #EXCEL PANEL
     
@@ -44,4 +55,6 @@ def app_server(input, output, session):
             print("No file found")
             return pd.DataFrame() # Retourner un dataframe vide si aucun fichier n'est chargé
     
+    react_button_module("excel_validate")
+
     

@@ -10,7 +10,7 @@ app_ui = ui.page_navbar(
                 text_input_module("oracle_hostname", "Hostname :"),
                 numeric_input_module("oracle_port", "Port :"),
                 text_input_module("oracle_username", "Username :"),
-                password_input_module("passwordOracle", "Password :"),
+                password_input_module("oracle_password", "Password :"),
                 textarea_input_module("oracle_sql_query", "SQL Query :"),
                 selectize_input_module("state1","Choose a state :", {}, multiple=True,),
                 selectize_input_module("state2","Choose a second state :", {}, multiple=True),
@@ -39,10 +39,14 @@ app_ui = ui.page_navbar(
     ),
 
     ui.nav_panel("Snowflake", ui.page_sidebar(  
-        ui.sidebar(ui.h2("Snowflake")))),  
+        ui.sidebar(ui.h2("Snowflake"),
+            button_module("snowflake_validate", "Valider"), 
+))),  
 
     ui.nav_panel("IICS", ui.page_sidebar(  
-        ui.sidebar(ui.h2("IICS")))), 
+        ui.sidebar(ui.h2("IICS"),
+            button_module("iics_validate", "Valider"), 
+))), 
 
     ui.nav_panel("Excel", ui.page_sidebar(  
         ui.sidebar(ui.h2("Excel"), 
