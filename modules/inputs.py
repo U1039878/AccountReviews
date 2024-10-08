@@ -69,6 +69,7 @@ def react_button_module(input, output, session):
     def _():
         if (session.ns('actionButton') == "oracle_validate-actionButton") :
             print("Search oracle DB")
+            print(userInput)
 
         elif (session.ns('actionButton') == "postgreSQL_validate-actionButton"):
             print("Search PostGreSQL DB")
