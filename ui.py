@@ -3,6 +3,12 @@ import shinyswatch
 from modules.inputs import *
 import pandas as pd
 
+choices = {
+    "1A": "Choice 1A", 
+    "1B": "Choice 1B", 
+    "1C": "Choice 1C"
+}
+
 
 app_ui = ui.page_navbar(  
     ui.nav_panel("Oracle", ui.page_sidebar(  
@@ -13,18 +19,8 @@ app_ui = ui.page_navbar(
                 text_input_module("oracle_username", "Username"),
                 password_input_module("oracle_password", "Password"),
                 textarea_input_module("oracle_sql_query", "SQL Query"),
-                ui.input_selectize(
-                        "oracle_user_header",
-                        "Choose the field for user name",
-                        {},
-                        multiple=False,
-                    ),
-                    ui.input_selectize(
-                        "oracle_email_header",
-                        "Choose the field for email",
-                        {},
-                        multiple=False,
-                    ),
+                selectize_input_module("oracle_user_header", "Choose the user name field", choices),
+                selectize_input_module("oracle_email_header", "Choose the field for email", choices),
                 button_module("oracle_validate", "Valider"), 
                 position="left", 
                 bg="#f8f8f8",
@@ -40,18 +36,8 @@ app_ui = ui.page_navbar(
                 text_input_module("postgreSQL_username", "Username"),
                 password_input_module("postgreSQL_password", "Password"),
                 textarea_input_module("postgreSQL_sql_query", "SQL Query"),
-                ui.input_selectize(
-                        "postgreSQL_user_header",
-                        "Choose the field for user name",
-                        {},
-                        multiple=False,
-                    ),
-                    ui.input_selectize(
-                        "postgreSQL_email_header",
-                        "Choose the field for email",
-                        {},
-                        multiple=False,
-                    ),
+                selectize_input_module("postgreSQL_user_header", "Choose the field for email", choices),
+                selectize_input_module("postgreSQL_email_header", "Choose the field for email", choices),
                 button_module("postgreSQL_validate", "Valider"), 
                 position="left", 
                 bg="#f8f8f8",
@@ -84,18 +70,8 @@ app_ui = ui.page_navbar(
                     text_input_module("excel_appication_name", "Application name"),
                     ui.input_file("file_upload", "Choose Excel File", accept=[".xlsx"], multiple=False),
                     ui.output_table("table"),
-                    ui.input_selectize(
-                        "excel_user_header",
-                        "Choose the field for user name",
-                        {},
-                        multiple=False,
-                    ),
-                    ui.input_selectize(
-                        "excel_email_header",
-                        "Choose the field for email",
-                        {},
-                        multiple=False,
-                    ),
+                    selectize_input_module("excel_user_header", "Choose the field for email", choices),
+                    selectize_input_module("excel_email_header", "Choose the field for email", choices),
                     button_module("excel_validate", "Valider"), 
                     width=400, 
                 ),

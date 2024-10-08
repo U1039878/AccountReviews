@@ -13,6 +13,7 @@ def app_server(input, output, session):
     render_text_module("oracle_username")
     render_password_module("passwordOracle")
     render_textarea_module("oracle_sql_query")
+    render_selectize_module("oracle_user_header")
     react_button_module("oracle_validate")
 
 
@@ -44,6 +45,10 @@ def app_server(input, output, session):
 
     #EXCEL PANEL
     render_text_module("excel_appication_name")
+    render_selectize_module("excel_user_header")
+    render_selectize_module("excel_email_header")
+
+
 
     @render.data_frame  
     def excel_input():
@@ -54,8 +59,9 @@ def app_server(input, output, session):
             df = pd.read_excel(file_info["datapath"])  # Lit le fichier Excel
             comlumnNames = df.columns
             listColumnNames = comlumnNames.tolist()
-            ui.update_selectize("excel_user_header", choices=listColumnNames)
-            ui.update_selectize("excel_email_header", choices=listColumnNames)
+            ui.update_selectize("excel_user_header-selectizeInput", choices=listColumnNames)
+            ui.update_selectize("excel_email_header-selectizeInput", choices=listColumnNames)
+
 
             # Retourner le dataframe pour l'afficher dans l'UI
             return df
@@ -65,4 +71,3 @@ def app_server(input, output, session):
     
     react_button_module("excel_validate")
 
-    

@@ -22,6 +22,10 @@ def textarea_input_module(label):
 def button_module(label):
     return ui.input_action_button("actionButton", label)
 
+@module.ui
+def selectize_input_module(label, choices):
+    return ui.input_selectize("selectizeInput", label, choices, multiple=False)
+
 # MODULES SERVEUR
 
 #Stockage des inputs utilisateurs en attendant requêtage
@@ -51,6 +55,12 @@ def render_textarea_module(input, output, session):
     def _():
         userInput[session.ns('textArea')] = input.textArea()
 
+@module.server
+def render_selectize_module(input, output, session):
+    @reactive.effect
+    def _():
+        userInput[session.ns('selectizeInput')] = input.selectizeInput()
+
 #Requêtage BDD
 @module.server
 def react_button_module(input, output, session):
@@ -66,7 +76,6 @@ def react_button_module(input, output, session):
         elif (session.ns('actionButton') == "snowflake_validate-actionButton"):
             print("Search Snowflake DB")
             print(userInput)
-
 
         elif (session.ns('actionButton') == "iics_validate-actionButton"):
             print("Search IICS DB")
