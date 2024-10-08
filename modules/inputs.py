@@ -15,10 +15,6 @@ def password_input_module(label):
     return ui.input_password("passwordInput", label)
 
 @module.ui
-def selectize_input_module(label, choices, multiple):
-    return ui.input_selectize("selectizeInput", label, choices, multiple=multiple)
-
-@module.ui
 def textarea_input_module(label):
     return ui.input_text_area("textArea", label)
 
@@ -50,12 +46,6 @@ def render_password_module(input, output, session):
         userInput[session.ns('passwordInput')] = input.passwordInput()
 
 @module.server
-def render_selectize_module(input, output, session):
-    @reactive.effect
-    def _():
-        userInput[session.ns('selectizeInput')] = input.selectizeInput()
-
-@module.server
 def render_textarea_module(input, output, session):
     @reactive.effect
     def _():
@@ -69,13 +59,14 @@ def react_button_module(input, output, session):
     def _():
         if (session.ns('actionButton') == "oracle_validate-actionButton") :
             print("Search oracle DB")
-            print(userInput)
 
         elif (session.ns('actionButton') == "postgreSQL_validate-actionButton"):
             print("Search PostGreSQL DB")
 
         elif (session.ns('actionButton') == "snowflake_validate-actionButton"):
             print("Search Snowflake DB")
+            print(userInput)
+
 
         elif (session.ns('actionButton') == "iics_validate-actionButton"):
             print("Search IICS DB")
